@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WIL PRONOSTICS — Pronostics Football</title>
+  <meta name="description" content="WIL PRONOSTICS — Retrouvez nos coupons et analyses de pronostics football.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --blue: #1769ff;
+      --blue-dark: #0b3fa8;
+      --black: #111111;
+      --white: #ffffff;
+      --cream: #f5f0e8;
+      --wood: #b88958;
+      --green: #159447;
+      --orange: #e68a00;
+      --red: #d93636;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    /* HEADER */
+    header {
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #ddd4c8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      min-height: 70px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--black);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      border: 3px solid var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    .admin-btn {
+      background: var(--black);
+      color: white !important;
+      padding: 9px 13px;
+      border-radius: 9px;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 55px 18px 35px;
+    }
+
+    .hero-box {
+      background:
+        linear-gradient(135deg, rgba(17,17,17,.97), rgba(25,35,55,.96));
+      border-radius: 25px;
+      padding: 38px 25px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(0,0,0,.15);
+    }
+
+    .hero-box::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -80px;
+      top: -80px;
+      border-radius: 50%;
+      background: rgba(23,105,255,.25);
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--blue);
+      padding: 7px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(35px, 8vw, 65px);
+      line-height: .95;
+      margin-bottom: 17px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 span {
+      color: #4f91ff;
+    }
+
+    .hero p {
+      max-width: 600px;
+      color: #d8d8d8;
+      margin-bottom: 24px;
+      font-size: 16px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 13px 18px;
+      border-radius: 11px;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .primary-btn {
+      background: var(--blue);
+      color: white;
+    }
+
+    .secondary-btn {
+      background: white;
+      color: var(--black);
+    }
+
+    /* CONTENT */
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 18px 50px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 15px;
+      margin: 15px 0 18px;
+    }
+
+    .section-title h2 {
+      font-size: 25px;
+    }
+
+    .section-title p {
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* FILTERS */
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 8px;
+    }
+
+    .filter {
+      border: 1px solid #d8d0c6;
+      background: white;
+      border-radius: 30px;
+      padding: 9px 14px;
+      white-space: nowrap;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .filter.active {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+
+    /* COUPONS */
+    .coupons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .coupon {
+      background: white;
+      border-radius: 18px;
+      border: 1px solid #e2dbd1;
+      overflow: hidden;
+      box-shadow: 0 7px 20px rgba(0,0,0,.06);
+    }
+
+    .coupon-top {
+      padding: 16px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .coupon-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .bookmaker {
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--blue);
+    }
+
+    .status {
+      font-size: 11px;
+      padding: 5px 8px;
+      border-radius: 30px;
+      font-weight: 900;
+    }
+
+    .pending {
+      color: #9a5b00;
+      background: #fff0d4;
+    }
+
+    .won {
+      color: #08702f;
+      background: #dff7e8;
+    }
+
+    .lost {
+      color: #a52222;
+      background: #ffe0e0;
+    }
+
+    .coupon-code {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: .5px;
+    }
+
+    .matches {
+      padding: 15px 16px;
+    }
+
+    .match {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .match:last-child {
+      border-bottom: none;
+    }
+
+    .match-teams {
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .match-pick {
+      color: #666;
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .match-odd {
+      float: right;
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    .coupon-bottom {
+      padding: 14px 16px;
+      background: #faf9f7;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .total-label {
+      color: #777;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .total {
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .view-btn {
+      border: none;
+      background: var(--black);
+      color: white;
+      padding: 10px 13px;
+      border-radius: 9px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* PROMOS */
+    .promos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .promo {
+      border-radius: 18px;
+      padding: 22px;
+      color: white;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .promo:nth-child(2) {
+      background: var(--blue-dark);
+    }
+
+    .promo h3 {
+      font-size: 23px;
+      margin-bottom: 5px;
+    }
+
+    .promo p {
+      color: #ddd;
+      font-size: 13px;
+    }
+
+    .promo-code {
+      margin-top: 15px;
+      display: inline-block;
+      background: white;
+      color: var(--black);
+      padding: 9px 13px;
+      border-radius: 9px;
+      font-weight: 900;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      color: white;
+      padding: 30px 18px;
+      text-align: center;
+    }
+
+    footer strong {
+      color: #4f91ff;
+    }
+
+    footer p {
+      color: #aaa;
+      font-size: 12px;
+      margin-top: 7px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      nav a:not(.admin-btn) {
+        display: none;
+      }
+
+      .coupons {
+        grid-template-columns: 1fr;
+      }
+
+      .promos {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 25px;
+      }
+
+      .hero-box {
+        padding: 30px 20px;
+        border-radius: 20px;
+      }
+
+      .section-title h2 {
+        font-size: 21px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .logo {
+        font-size: 16px;
+      }
+
+      .logo-icon {
+        width: 37px;
+        height: 37px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="nav">
+
+      <div class="logo">
+        <div class="logo-icon">W</div>
+        <span>WIL PRONOSTICS</span>
+      </div>
+
+      <nav>
+        <a href="#">Accueil</a>
+        <a href="#coupons">Coupons</a>
+        <a href="#historique">Historique</a>
+        <a href="#" class="admin-btn">Admin</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-box">
+
+      <span class="badge">⚽ FOOTBALL • PRONOSTICS</span>
+
+      <h1>
+        WIL<br>
+        <span>PRONOSTICS</span>
+      </h1>
+
+      <p>
+        Retrouvez nos coupons de pronostics football,
+        nos analyses et l'historique de nos résultats
+        au même endroit.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#coupons" class="primary-btn">
+          🎟️ Voir les coupons
+        </a>
+
+        <a href="#promos" class="secondary-btn">
+          📢 Nos partenaires
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <main>
+
+    <section id="coupons">
+
+      <div class="section-title">
+        <div>
+          <h2>🎟️ Derniers coupons</h2>
+          <p>Les dernières publications WIL PRONOSTICS</p>
+        </div>
+      </div>
+
+      <div class="filters">
+        <button class="filter active">Tous</button>
+        <button class="filter">LINEBET</button>
+        <button class="filter">1XBET</button>
+        <button class="filter">🟢 Gagnés</button>
+        <button class="filter">🟠 En attente</button>
+        <button class="filter">🔴 Perdus</button>
+      </div>
+
+      <div class="coupons">
+
+        <!-- COUPON 1 -->
+        <article class="coupon">
+
+          <div class="coupon-top">
+
+            <div class="coupon-head">
+              <span class="bookmaker">LINEBET</span>
+              <span class="status pending">🟠 EN ATTENTE</span>
+            </div>
+
+            <div class="coupon-code">
+              WIL-240826-01
+            </div>
+
+          </div>
+
+          <div class="matches">
+
+            <div class="match">
+              <span class="match-odd">1.45</span>
+              <div class="match-teams">
+                Manchester City — Chelsea
+              </div>
+              <div class="match-pick">
+                Victoire Manchester City
+              </div>
+            </div>
+
+            <div class="match">
+              <span class="match-odd">1.32</span>
+              <div class="match-teams">
+                Real Madrid — Sevilla
+              </div>
+              <div class="match-pick">
+                Plus de 1.5 buts
+              </div>
+            </div>
+
+            <div class="match">
+              <span class="match-odd">1.60</span>
+              <div class="match-teams">
+                PSG — Lyon
+              </div>
+              <div class="match-pick">
+                Victoire PSG
+              </div>
+            </div>
+
+          </div>
+
+          <div class="coupon-bottom">
+
+            <div>
+              <div class="total-label">COTE TOTALE</div>
+              <div class="total">3.06</div>
+            </div>
+
+            <button class="view-btn">
+              Voir →
+            </button>
+
+          </div>
+
+        </article>
+
+        <!-- COUPON 2 -->
+        <article class="coupon">
+
+          <div class="coupon-top">
+
+            <div class="coupon-head">
+              <span class="bookmaker">1XBET</span>
+              <span class="status won">🟢 GAGNÉ</span>
+            </div>
+
+            <div class="coupon-code">
+              WIL-240825-02
+            </div>
+
+          </div>
+
+          <div class="matches">
+
+            <div class="match">
+              <span class="match-odd">1.55</span>
+              <div class="match-teams">
+                Arsenal — Liverpool
+              </div>
+              <div class="match-pick">
+                Plus de 1.5 buts
+              </div>
+            </div>
+
+            <div class="match">
+              <span class="match-odd">1.48</span>
+              <div class="match-teams">
+                Bayern — Dortmund
+              </div>
+              <div class="match-pick">
+                Bayern ou nul
+              </div>
+            </div>
+
+          </div>
+
+          <div class="coupon-bottom">
+
+            <div>
+              <div class="total-label">COTE TOTALE</div>
+              <div class="total">2.29</div>
+            </div>
+
+            <button class="view-btn">
+              Voir →
+            </button>
+
+          </div>
+
+        </article>
+
+        <!-- COUPON 3 -->
+        <article class="coupon">
+
+          <div class="coupon-top">
+
+            <div class="coupon-head">
+              <span class="bookmaker">LINEBET</span>
+              <span class="status lost">🔴 PERDU</span>
+            </div>
+
+            <div class="coupon-code">
+              WIL-240824-03
+            </div>
+
+          </div>
+
+          <div class="matches">
+
+            <div class="match">
+              <span class="match-odd">1.40</span>
+              <div class="match-teams">
+                Inter — Milan
+              </div>
+              <div class="match-pick">
+                Plus de 1.5 buts
+              </div>
+            </div>
+
+            <div class="match">
+              <span class="match-odd">1.50</span>
+              <div class="match-teams">
+                Barça — Valencia
+              </div>
+              <div class="match-pick">
+                Victoire Barça
+              </div>
+            </div>
+
+          </div>
+
+          <div class="coupon-bottom">
+
+            <div>
+              <div class="total-label">COTE TOTALE</div>
+              <div class="total">2.10</div>
+            </div>
+
+            <button class="view-btn">
+              Voir →
+            </button>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- PROMOTIONS -->
+    <section id="promos">
+
+      <div class="section-title">
+        <div>
+          <h2>📢 Nos partenaires</h2>
+          <p>Codes promotionnels</p>
+        </div>
+      </div>
+
+      <div class="promos">
+
+        <div class="promo">
+          <h3>LINEBET</h3>
+          <p>Utilise notre code promotionnel :</p>
+          <span class="promo-code">WIL228</span>
+        </div>
+
+        <div class="promo">
+          <h3>1XBET</h3>
+          <p>Utilise notre code promotionnel :</p>
+          <span class="promo-code">WIL282</span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="historique" style="margin-top:40px;">
+
+      <div class="section-title">
+        <div>
+          <h2>📊 Historique</h2>
+          <p>Suivez les publications précédentes</p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <strong>WIL PRONOSTICS</strong>
+
+    <p>
+      Football • Pronostics • Analyses
+    </p>
+
+    <p>
+      © 2026 WIL PRONOSTICS — Tous droits réservés.
+    </p>
+
+  </footer>
+
+</body>
+  </html>
