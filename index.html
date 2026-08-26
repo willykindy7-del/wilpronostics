@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>WIL PRONOSTICS — Pronostics Football</title>
-  <meta name="description" content="WIL PRONOSTICS — Retrouvez nos coupons et analyses de pronostics football.">
+  <title>WIL PRONOSTICS — Football</title>
+  <meta
+    name="description"
+    content="WIL PRONOSTICS — Suivez les publications et analyses football."
+  >
 
   <style>
     * {
@@ -20,10 +23,15 @@
       --black: #111111;
       --white: #ffffff;
       --cream: #f5f0e8;
-      --wood: #b88958;
       --green: #159447;
       --orange: #e68a00;
       --red: #d93636;
+      --gray: #777;
+      --border: #e2dbd1;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -33,13 +41,26 @@
       line-height: 1.5;
     }
 
-    /* HEADER */
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
-      background: rgba(255,255,255,0.96);
+      background: rgba(255,255,255,.97);
       border-bottom: 1px solid #ddd4c8;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
     }
 
     .nav {
@@ -59,7 +80,6 @@
       gap: 10px;
       font-weight: 900;
       font-size: 20px;
-      letter-spacing: -0.5px;
     }
 
     .logo-icon {
@@ -72,11 +92,13 @@
       place-items: center;
       font-weight: 900;
       border: 3px solid var(--blue);
+      flex-shrink: 0;
     }
 
     nav {
       display: flex;
-      gap: 18px;
+      align-items: center;
+      gap: 10px;
     }
 
     nav a {
@@ -84,31 +106,40 @@
       color: #333;
       font-weight: 700;
       font-size: 14px;
+      padding: 9px 10px;
+      border-radius: 9px;
     }
 
     nav a:hover {
       color: var(--blue);
+      background: #f1f5ff;
     }
 
     .admin-btn {
       background: var(--black);
       color: white !important;
-      padding: 9px 13px;
-      border-radius: 9px;
+      padding: 10px 14px !important;
     }
 
-    /* HERO */
+    /* =========================
+       HERO
+    ========================= */
+
     .hero {
       max-width: 1100px;
-      margin: 0 auto;
-      padding: 55px 18px 35px;
+      margin: auto;
+      padding: 45px 18px 35px;
     }
 
     .hero-box {
       background:
-        linear-gradient(135deg, rgba(17,17,17,.97), rgba(25,35,55,.96));
+        linear-gradient(
+          135deg,
+          rgba(17,17,17,.98),
+          rgba(25,35,55,.97)
+        );
       border-radius: 25px;
-      padding: 38px 25px;
+      padding: 40px 25px;
       color: white;
       position: relative;
       overflow: hidden;
@@ -118,12 +149,13 @@
     .hero-box::after {
       content: "";
       position: absolute;
-      width: 220px;
-      height: 220px;
-      right: -80px;
-      top: -80px;
+      width: 250px;
+      height: 250px;
+      right: -90px;
+      top: -90px;
       border-radius: 50%;
       background: rgba(23,105,255,.25);
+      pointer-events: none;
     }
 
     .badge {
@@ -134,6 +166,8 @@
       font-size: 12px;
       font-weight: 800;
       margin-bottom: 15px;
+      position: relative;
+      z-index: 2;
     }
 
     .hero h1 {
@@ -153,12 +187,16 @@
       color: #d8d8d8;
       margin-bottom: 24px;
       font-size: 16px;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      position: relative;
+      z-index: 2;
     }
 
     .primary-btn,
@@ -169,6 +207,7 @@
       border-radius: 11px;
       font-weight: 800;
       font-size: 14px;
+      transition: .2s ease;
     }
 
     .primary-btn {
@@ -181,11 +220,23 @@
       color: var(--black);
     }
 
-    /* CONTENT */
+    .primary-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
     main {
       max-width: 1100px;
       margin: auto;
       padding: 0 18px 50px;
+    }
+
+    section {
+      scroll-margin-top: 90px;
     }
 
     .section-title {
@@ -205,23 +256,35 @@
       font-size: 13px;
     }
 
-    /* FILTERS */
+    /* =========================
+       FILTERS
+    ========================= */
+
     .filters {
       display: flex;
       gap: 8px;
       overflow-x: auto;
-      padding-bottom: 12px;
+      padding: 4px 2px 14px;
       margin-bottom: 8px;
+      scrollbar-width: thin;
     }
 
     .filter {
       border: 1px solid #d8d0c6;
       background: white;
+      color: var(--black);
       border-radius: 30px;
       padding: 9px 14px;
       white-space: nowrap;
       font-weight: 700;
       font-size: 13px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .filter:hover {
+      border-color: var(--blue);
+      color: var(--blue);
     }
 
     .filter.active {
@@ -230,7 +293,10 @@
       border-color: var(--blue);
     }
 
-    /* COUPONS */
+    /* =========================
+       COUPONS
+    ========================= */
+
     .coupons {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -240,9 +306,19 @@
     .coupon {
       background: white;
       border-radius: 18px;
-      border: 1px solid #e2dbd1;
+      border: 1px solid var(--border);
       overflow: hidden;
       box-shadow: 0 7px 20px rgba(0,0,0,.06);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .coupon:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.10);
+    }
+
+    .coupon.hidden {
+      display: none;
     }
 
     .coupon-top {
@@ -269,6 +345,7 @@
       padding: 5px 8px;
       border-radius: 30px;
       font-weight: 900;
+      white-space: nowrap;
     }
 
     .pending {
@@ -308,6 +385,7 @@
     .match-teams {
       font-weight: 800;
       font-size: 13px;
+      padding-right: 50px;
     }
 
     .match-pick {
@@ -349,9 +427,35 @@
       border-radius: 9px;
       font-weight: 800;
       cursor: pointer;
+      transition: .2s ease;
     }
 
-    /* PROMOS */
+    .view-btn:hover {
+      background: var(--blue);
+      transform: translateY(-1px);
+    }
+
+    /* MESSAGE FILTRE VIDE */
+
+    .empty-message {
+      display: none;
+      text-align: center;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 35px 20px;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    .empty-message.show {
+      display: block;
+    }
+
+    /* =========================
+       PROMOS
+    ========================= */
+
     .promos {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -382,17 +486,160 @@
       font-size: 13px;
     }
 
-    .promo-code {
-      margin-top: 15px;
-      display: inline-block;
+    /* =========================
+       HISTORIQUE
+    ========================= */
+
+    .history-box {
       background: white;
-      color: var(--black);
-      padding: 9px 13px;
-      border-radius: 9px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+
+    .history-stat {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      background: #faf9f7;
+      border-radius: 14px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 25px;
       font-weight: 900;
     }
 
-    /* FOOTER */
+    .stat-label {
+      font-size: 12px;
+      color: #777;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 2000;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      width: min(520px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 25px 70px rgba(0,0,0,.30);
+      animation: modalIn .2s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px) scale(.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .modal-header h3 {
+      font-size: 19px;
+    }
+
+    .close-modal {
+      width: 35px;
+      height: 35px;
+      border: none;
+      border-radius: 50%;
+      background: #f1f1f1;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .close-modal:hover {
+      background: #e5e5e5;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 11px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      color: #777;
+      font-size: 13px;
+    }
+
+    .detail-value {
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .detail-matches {
+      margin-top: 15px;
+    }
+
+    .detail-match {
+      background: #faf9f7;
+      padding: 13px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .detail-match strong {
+      display: block;
+      padding-right: 45px;
+    }
+
+    .detail-match span {
+      color: #666;
+      font-size: 12px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer {
       background: var(--black);
       color: white;
@@ -410,8 +657,12 @@
       margin-top: 7px;
     }
 
-    /* MOBILE */
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 800px) {
+
       nav a:not(.admin-btn) {
         display: none;
       }
@@ -438,7 +689,12 @@
       }
     }
 
-    @media (max-width: 420px) {
+    @media (max-width: 500px) {
+
+      .history-stat {
+        grid-template-columns: 1fr;
+      }
+
       .logo {
         font-size: 16px;
       }
@@ -460,11 +716,19 @@
       .secondary-btn {
         text-align: center;
       }
+
+      .coupon-head {
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- =========================
+       HEADER
+  ========================= -->
 
   <header>
     <div class="nav">
@@ -475,19 +739,27 @@
       </div>
 
       <nav>
-        <a href="#">Accueil</a>
+        <a href="#accueil">Accueil</a>
         <a href="#coupons">Coupons</a>
         <a href="#historique">Historique</a>
-        <a href="#" class="admin-btn">Admin</a>
+        <a href="#promos" class="admin-btn">Admin</a>
       </nav>
 
     </div>
   </header>
 
-  <section class="hero">
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <section class="hero" id="accueil">
+
     <div class="hero-box">
 
-      <span class="badge">⚽ FOOTBALL • PRONOSTICS</span>
+      <span class="badge">
+        ⚽ FOOTBALL • ANALYSES
+      </span>
 
       <h1>
         WIL<br>
@@ -495,54 +767,133 @@
       </h1>
 
       <p>
-        Retrouvez nos coupons de pronostics football,
-        nos analyses et l'historique de nos résultats
+        Retrouvez les publications football,
+        les analyses et l'historique des résultats
         au même endroit.
       </p>
 
       <div class="hero-buttons">
-        <a href="#coupons" class="primary-btn">
+
+        <a
+          href="#coupons"
+          class="primary-btn"
+        >
           🎟️ Voir les coupons
         </a>
 
-        <a href="#promos" class="secondary-btn">
+        <a
+          href="#promos"
+          class="secondary-btn"
+        >
           📢 Nos partenaires
         </a>
+
       </div>
 
     </div>
+
   </section>
 
+
+  <!-- =========================
+       MAIN
+  ========================= -->
+
   <main>
+
+    <!-- COUPONS -->
 
     <section id="coupons">
 
       <div class="section-title">
+
         <div>
           <h2>🎟️ Derniers coupons</h2>
-          <p>Les dernières publications WIL PRONOSTICS</p>
+
+          <p>
+            Les dernières publications WIL PRONOSTICS
+          </p>
         </div>
+
       </div>
+
+
+      <!-- FILTRES -->
 
       <div class="filters">
-        <button class="filter active">Tous</button>
-        <button class="filter">LINEBET</button>
-        <button class="filter">1XBET</button>
-        <button class="filter">🟢 Gagnés</button>
-        <button class="filter">🟠 En attente</button>
-        <button class="filter">🔴 Perdus</button>
+
+        <button
+          class="filter active"
+          data-filter="all"
+        >
+          Tous
+        </button>
+
+        <button
+          class="filter"
+          data-filter="linebet"
+        >
+          LINEBET
+        </button>
+
+        <button
+          class="filter"
+          data-filter="xbet"
+        >
+          1XBET
+        </button>
+
+        <button
+          class="filter"
+          data-filter="won"
+        >
+          🟢 Gagnés
+        </button>
+
+        <button
+          class="filter"
+          data-filter="pending"
+        >
+          🟠 En attente
+        </button>
+
+        <button
+          class="filter"
+          data-filter="lost"
+        >
+          🔴 Perdus
+        </button>
+
       </div>
 
-      <div class="coupons">
+
+      <!-- LISTE DES COUPONS -->
+
+      <div class="coupons" id="couponList">
+
 
         <!-- COUPON 1 -->
-        <article class="coupon">
+
+        <article
+          class="coupon"
+          data-bookmaker="linebet"
+          data-status="pending"
+          data-code="WIL-240826-01"
+          data-total="3.06"
+        >
 
           <div class="coupon-top">
 
             <div class="coupon-head">
-              <span class="bookmaker">LINEBET</span>
-              <span class="status pending">🟠 EN ATTENTE</span>
+
+              <span class="bookmaker">
+                LINEBET
+              </span>
+
+              <span class="status pending">
+                🟠 EN ATTENTE
+              </span>
+
             </div>
 
             <div class="coupon-code">
@@ -551,48 +902,95 @@
 
           </div>
 
+
           <div class="matches">
 
-            <div class="match">
-              <span class="match-odd">1.45</span>
+            <div
+              class="match"
+              data-teams="Manchester City — Chelsea"
+              data-pick="Victoire Manchester City"
+              data-odd="1.45"
+            >
+
+              <span class="match-odd">
+                1.45
+              </span>
+
               <div class="match-teams">
                 Manchester City — Chelsea
               </div>
+
               <div class="match-pick">
                 Victoire Manchester City
               </div>
+
             </div>
 
-            <div class="match">
-              <span class="match-odd">1.32</span>
+
+            <div
+              class="match"
+              data-teams="Real Madrid — Sevilla"
+              data-pick="Plus de 1.5 buts"
+              data-odd="1.32"
+            >
+
+              <span class="match-odd">
+                1.32
+              </span>
+
               <div class="match-teams">
                 Real Madrid — Sevilla
               </div>
+
               <div class="match-pick">
                 Plus de 1.5 buts
               </div>
+
             </div>
 
-            <div class="match">
-              <span class="match-odd">1.60</span>
+
+            <div
+              class="match"
+              data-teams="PSG — Lyon"
+              data-pick="Victoire PSG"
+              data-odd="1.60"
+            >
+
+              <span class="match-odd">
+                1.60
+              </span>
+
               <div class="match-teams">
                 PSG — Lyon
               </div>
+
               <div class="match-pick">
                 Victoire PSG
               </div>
+
             </div>
 
           </div>
 
+
           <div class="coupon-bottom">
 
             <div>
-              <div class="total-label">COTE TOTALE</div>
-              <div class="total">3.06</div>
+
+              <div class="total-label">
+                COTE TOTALE
+              </div>
+
+              <div class="total">
+                3.06
+              </div>
+
             </div>
 
-            <button class="view-btn">
+            <button
+              class="view-btn"
+              type="button"
+            >
               Voir →
             </button>
 
@@ -600,14 +998,29 @@
 
         </article>
 
+
         <!-- COUPON 2 -->
-        <article class="coupon">
+
+        <article
+          class="coupon"
+          data-bookmaker="xbet"
+          data-status="won"
+          data-code="WIL-240825-02"
+          data-total="2.29"
+        >
 
           <div class="coupon-top">
 
             <div class="coupon-head">
-              <span class="bookmaker">1XBET</span>
-              <span class="status won">🟢 GAGNÉ</span>
+
+              <span class="bookmaker">
+                1XBET
+              </span>
+
+              <span class="status won">
+                🟢 GAGNÉ
+              </span>
+
             </div>
 
             <div class="coupon-code">
@@ -616,158 +1029,86 @@
 
           </div>
 
+
           <div class="matches">
 
-            <div class="match">
-              <span class="match-odd">1.55</span>
+            <div
+              class="match"
+              data-teams="Arsenal — Liverpool"
+              data-pick="Plus de 1.5 buts"
+              data-odd="1.55"
+            >
+
+              <span class="match-odd">
+                1.55
+              </span>
+
               <div class="match-teams">
                 Arsenal — Liverpool
               </div>
+
               <div class="match-pick">
                 Plus de 1.5 buts
               </div>
+
             </div>
 
-            <div class="match">
-              <span class="match-odd">1.48</span>
+
+            <div
+              class="match"
+              data-teams="Bayern — Dortmund"
+              data-pick="Bayern ou nul"
+              data-odd="1.48"
+            >
+
+              <span class="match-odd">
+                1.48
+              </span>
+
               <div class="match-teams">
                 Bayern — Dortmund
               </div>
+
               <div class="match-pick">
                 Bayern ou nul
               </div>
+
             </div>
 
           </div>
 
+
           <div class="coupon-bottom">
 
             <div>
-              <div class="total-label">COTE TOTALE</div>
-              <div class="total">2.29</div>
+
+              <div class="total-label">
+                COTE TOTALE
+              </div>
+
+              <div class="total">
+                2.29
+              </div>
+
             </div>
 
-            <button class="view-btn">
+            <button
+              class="view-btn"
+              type="button"
+            >
               Voir →
             </button>
 
           </div>
 
         </article>
+
 
         <!-- COUPON 3 -->
-        <article class="coupon">
 
-          <div class="coupon-top">
-
-            <div class="coupon-head">
-              <span class="bookmaker">LINEBET</span>
-              <span class="status lost">🔴 PERDU</span>
-            </div>
-
-            <div class="coupon-code">
-              WIL-240824-03
-            </div>
-
-          </div>
-
-          <div class="matches">
-
-            <div class="match">
-              <span class="match-odd">1.40</span>
-              <div class="match-teams">
-                Inter — Milan
-              </div>
-              <div class="match-pick">
-                Plus de 1.5 buts
-              </div>
-            </div>
-
-            <div class="match">
-              <span class="match-odd">1.50</span>
-              <div class="match-teams">
-                Barça — Valencia
-              </div>
-              <div class="match-pick">
-                Victoire Barça
-              </div>
-            </div>
-
-          </div>
-
-          <div class="coupon-bottom">
-
-            <div>
-              <div class="total-label">COTE TOTALE</div>
-              <div class="total">2.10</div>
-            </div>
-
-            <button class="view-btn">
-              Voir →
-            </button>
-
-          </div>
-
-        </article>
-
-      </div>
-
-    </section>
-
-    <!-- PROMOTIONS -->
-    <section id="promos">
-
-      <div class="section-title">
-        <div>
-          <h2>📢 Nos partenaires</h2>
-          <p>Codes promotionnels</p>
-        </div>
-      </div>
-
-      <div class="promos">
-
-        <div class="promo">
-          <h3>LINEBET</h3>
-          <p>Utilise notre code promotionnel :</p>
-          <span class="promo-code">WIL228</span>
-        </div>
-
-        <div class="promo">
-          <h3>1XBET</h3>
-          <p>Utilise notre code promotionnel :</p>
-          <span class="promo-code">WIL282</span>
-        </div>
-
-      </div>
-
-    </section>
-
-    <section id="historique" style="margin-top:40px;">
-
-      <div class="section-title">
-        <div>
-          <h2>📊 Historique</h2>
-          <p>Suivez les publications précédentes</p>
-        </div>
-      </div>
-
-    </section>
-
-  </main>
-
-  <footer>
-
-    <strong>WIL PRONOSTICS</strong>
-
-    <p>
-      Football • Pronostics • Analyses
-    </p>
-
-    <p>
-      © 2026 WIL PRONOSTICS — Tous droits réservés.
-    </p>
-
-  </footer>
-
-</body>
-  </html>
+        <article
+          class="coupon"
+          data-bookmaker="linebet"
+          data-status="lost"
+          data-code="WIL-240824-03"
+          data-total="2.10
